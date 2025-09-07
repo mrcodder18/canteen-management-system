@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Success - Canteen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        Welcome, {{ username }} |
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <h1>Order Placed Successfully!</h1>
+    <h2>Your Order:</h2>
+    <ul>
+    {% for item in items %}
+        <li>{{ item.qty }} x {{ item.name }} @ ₹{{ item.price }}</li>
+    {% endfor %}
+    </ul>
+    <h3>Total: ₹{{ total }}</h3>
+    <a href="{{ url_for('index') }}">Order More</a>
+</body>
+</html>
