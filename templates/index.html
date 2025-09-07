@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canteen Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        Welcome, {{ username }} |
+        <a href="{{ url_for('logout') }}">Logout</a> |
+        <a href="{{ url_for('my_orders') }}">My Orders</a>
+        {% if username == 'admin' %}
+        | <a href="{{ url_for('admin_orders') }}">Admin Panel</a>
+        {% endif %}
+    </div>
+    <h1>Canteen Menu</h1>
+    <form method="post" action="{{ url_for('order') }}">
+    <table>
+        <tr><th>Item</th><th>Price</th><th>Quantity</th></tr>
+        {% for item in menu %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>₹{{ item.price }}</td>
+            <td><input type="number" name="qty_{{ item.id }}" min="0" value="0"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Place Order</button>
+    </form>
+    <ul class="flash">{% for message in get_flashed_messages() %}<li>{{ message }}</li>{% endfor %}</ul>
+</body>
+</html>
