@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Orders - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        Admin |
+        <a href="{{ url_for('logout') }}">Logout</a>
+        | <a href="{{ url_for('index') }}">Menu</a>
+    </div>
+    <h1>All Orders</h1>
+    <ul>
+    {% for order in orders %}
+        <li>Order #{{ order.id }} by {{ order.user }} - Total: ₹{{ order.total }}
+            <ul>
+            {% for item in order.items %}
+                <li>{{ item.qty }} x {{ item.name }} @ ₹{{ item.price }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
